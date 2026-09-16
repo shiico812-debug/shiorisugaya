@@ -7,12 +7,22 @@
   <meta name="description" content="鍵盤ハーモニカ奏者、ピアニスト、作編曲家として活動する、菅谷詩織（すがやしおり／Shiori Sugaya）の公式サイト。演奏、作品、楽譜、教育活動を紹介します。">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://shiorisugaya.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="菅谷詩織">
+  <meta property="og:title" content="菅谷詩織（すがやしおり）｜鍵盤ハーモニカ奏者・ピアニスト・作編曲家">
+  <meta property="og:description" content="鍵盤ハーモニカ奏者、ピアニスト、作編曲家として活動する、菅谷詩織（すがやしおり／Shiori Sugaya）の公式サイト。">
+  <meta property="og:url" content="https://shiorisugaya.com/">
+  <meta property="og:image" content="https://shiorisugaya.com/images/og-00124.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "菅谷詩織",
     "url": "https://shiorisugaya.com/",
+    "image": "https://shiorisugaya.com/images/profile.jpg",
     "alternateName": ["すがやしおり", "Shiori Sugaya"],
     "jobTitle": ["鍵盤ハーモニカ奏者", "ピアニスト", "作編曲家"],
     "description": "鍵盤ハーモニカ奏者、ピアニスト、作編曲家。演奏、楽譜制作、音楽教育、映像音楽制作を行う。",
@@ -36,81 +46,117 @@
   }
   </script>
   <style>
-    :root { --mincho:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif; --white:#fffefd; --offwhite:#f6f5f1; --ink:#282828; --gray:#747474; --line:#dad9d4; --blue:#7897a0; }
+    :root { --bg:#0f0f10; --panel:#18181a; --line:#2a2a2d; --text:#f2f2f2; --muted:#a9a9ad; --coral:#e2674e; --light:#e6e5e3; --sans:"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { margin:0; background:var(--white); color:var(--ink); font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif; font-size:16px; line-height:2.0; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); font-size:15px; line-height:2; }
     a { color:inherit; text-decoration:none; }
-    ::selection { background:#d8e4e7; }
-    .site-header { display:flex; align-items:center; justify-content:space-between; width:min(1180px,90vw); height:72px; margin:0 auto; border-bottom:1px solid var(--line); }
-    .header-name { display:inline-flex; flex-direction:column; align-items:stretch; gap:.62rem; line-height:1; }
-    .hn-ja { font-family:var(--mincho); font-size:1.06rem; font-weight:400; text-align:justify; -webkit-text-align-last:justify; text-align-last:justify; }
-    .hn-en { color:var(--gray); font-size:.58rem; letter-spacing:.28em; margin-right:-.28em; }
-    nav { display:flex; gap:2rem; color:var(--gray); font-size:.75rem; letter-spacing:.08em; }
-    nav a:hover { color:var(--blue); }
-    .hero { display:grid; grid-template-columns:.8fr 1.2fr; gap:6vw; align-items:center; width:min(1180px,90vw); min-height:660px; margin:0 auto; padding:5rem 0 7rem; }
-    .hero h1 { margin:0 -.34em 0 0; font-family:var(--mincho); font-size:clamp(2.6rem,4.4vw,4.1rem); font-weight:400; letter-spacing:.34em; line-height:1.55; }
-    .aliases { margin:2rem 0 0; color:var(--gray); font-size:.82rem; letter-spacing:.16em; }
-    .roles { margin:.7rem 0 0; font-size:.88rem; letter-spacing:.1em; }
-    .video-frame { position:relative; overflow:hidden; width:100%; aspect-ratio:16/9; background:#202020; }
-    .video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-    .hero-video>p { margin:.8rem 0 0; color:var(--gray); font-size:.78rem; }
-    .section { width:min(1180px,90vw); margin:0 auto; padding:7rem 0; border-top:1px solid var(--line); }
-    .section-heading { display:grid; grid-template-columns:160px 1fr; align-items:baseline; margin-bottom:4rem; }
-    .section-heading h2 { margin:0; font-size:.85rem; font-weight:600; letter-spacing:.11em; }
-    .section-heading p { margin:0; color:var(--gray); font-size:.8rem; }
-    .english-content { display:grid; grid-template-columns:.8fr 1.2fr; gap:8vw; }
-    .profile-text { max-width:34rem; }
-    .profile-text p { margin:0 0 2.2rem; line-break:strict; }
+    ::selection { background:rgba(226,103,78,.35); }
+    .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+    .spread { display:flex; justify-content:space-between; }
+    .spread span { white-space:pre; }
+
+    .top { position:relative; }
+    .site-header { position:absolute; left:0; right:0; z-index:5; display:flex; justify-content:space-between; align-items:center; padding:22px clamp(16px,4vw,48px); }
+    .header-name { display:inline-flex; flex-direction:column; align-items:stretch; gap:9px; line-height:1; }
+    .hn-ja { font-weight:800; font-size:15px; text-align:justify; text-align-last:justify; }
+    .hn-en { font-weight:500; font-size:8.5px; opacity:.75; }
+    nav { display:flex; gap:22px; font-size:11px; letter-spacing:.18em; }
+    nav a:hover { color:var(--coral); }
+
+    .hero { position:relative; height:min(92vh,760px); min-height:460px; overflow:hidden; }
+    .hero img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:42% 40%; filter:brightness(.6) contrast(1.15) saturate(.85); }
+    .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(15,15,16,.45) 0,transparent 22%,transparent 50%,var(--bg) 100%); }
+    .hero-title { position:absolute; z-index:2; left:clamp(16px,5vw,64px); bottom:clamp(36px,8vh,80px); display:inline-flex; flex-direction:column; align-items:stretch; font-size:clamp(44px,5.6vw,72px); }
+    .hero h1 { margin:0 -.3em 0 0; font-size:1em; font-weight:600; letter-spacing:.3em; line-height:1.1; }
+    .hero .aliases { margin:.55em 0 0; font-size:clamp(11px,1.05vw,13px); font-weight:400; opacity:.9; line-height:1.6; }
+    .hero .roles { margin:2.6em 0 0; font-size:clamp(10.5px,.98vw,12.5px); font-weight:400; color:#d8d8d8; line-height:1.6; text-align:justify; text-align-last:justify; }
+
+    .wrap { max-width:1040px; margin:0 auto; padding:clamp(64px,10vw,110px) clamp(16px,5vw,48px); }
+    .section-heading { display:flex; align-items:baseline; gap:14px; margin-bottom:34px; }
+    .section-heading h2 { margin:0; font-size:13px; font-weight:800; letter-spacing:.3em; }
+    .section-heading h2::before { content:""; display:inline-block; width:22px; height:2px; margin-right:12px; background:var(--coral); vertical-align:middle; }
+    .section-heading p { margin:0; color:var(--muted); font-size:11px; letter-spacing:.12em; }
+
+    .profile { background:var(--light); color:#141414; }
+    .profile .section-heading p { color:#6b6b6b; }
+    .profile-content { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:clamp(24px,5vw,64px); align-items:start; }
+    .profile-content img { display:block; width:100%; height:auto; aspect-ratio:2/3; object-fit:cover; object-position:50% 20%; }
+    .profile-text p { margin:0 0 1.1em; color:#262626; font-size:14.5px; text-align:justify; line-break:strict; }
+    .profile-text p:first-child { color:#111; font-size:16px; }
     .profile-text p:last-child { margin-bottom:0; }
-    .profile-text p:first-child { margin-bottom:2.8rem; font-size:clamp(1.15rem,1.6vw,1.4rem); line-height:1.8; }
-    .activity { width:100%; padding-right:max(5vw,calc((100vw - 1180px)/2)); padding-left:max(5vw,calc((100vw - 1180px)/2)); background:var(--offwhite); }
-    .activity-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2.5rem; }
-    .activity-grid article { padding-top:1.5rem; border-top:2px solid var(--blue); }
-    .activity-grid h3 { margin:0 0 .8rem; font-size:1.05rem; font-weight:600; }
-    .activity-grid p { margin:0; color:var(--gray); font-size:.9rem; }
-    .video-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); gap:2rem; }
-    .video-grid h3 { margin:1.1rem 0 0; font-size:.95rem; font-weight:500; line-height:1.75; }
-    .video-grid article>p { margin:0; color:var(--gray); font-size:.78rem; }
-    .more-link { display:inline-block; margin-top:2.5rem; padding-bottom:.15rem; border-bottom:1px solid var(--ink); font-size:.85rem; }
-    .more-link:hover,.link-list a:hover,.media-list a:hover { color:var(--blue); }
-    .works-lead { max-width:38rem; margin:0 0 2.6rem; font-size:1rem; }
-    .works-list { max-width:38rem; margin:0 0 3rem; padding:0; list-style:none; border-top:1px solid var(--line); }
-    .works-list li { padding:1.15rem 0; border-bottom:1px solid var(--line); font-size:.92rem; }
-    .works-status { margin:0 0 1.7rem; font-size:.88rem; }
-    .works-cta { margin-top:0; }
-    .profile-text p, .works-list li { text-align:justify; text-justify:inter-character; line-break:strict; }
-    .activity-grid p { line-break:strict; }
-    .links-section { width:100%; padding-right:max(5vw,calc((100vw - 1180px)/2)); padding-left:max(5vw,calc((100vw - 1180px)/2)); background:#eef2f2; }
-    .link-list { border-top:1px solid #cfd8da; }
-    .link-list a { display:grid; grid-template-columns:.7fr 1.3fr auto; gap:2rem; align-items:center; min-height:82px; border-bottom:1px solid #cfd8da; }
-    .link-list strong { font-size:1rem; font-weight:600; }
-    .link-list span,.english-content p { color:var(--gray); font-size:.9rem; }
-    .link-list em,.media-list em { font-style:normal; }
-    .media-list { border-top:1px solid var(--line); }
-    .media-list a { display:grid; grid-template-columns:180px 1fr auto; gap:2rem; align-items:center; padding:1.25rem 0; border-bottom:1px solid var(--line); }
-    .media-list small { color:var(--gray); font-size:.78rem; }
-    .english-content h3 { margin:0; font-size:1.5rem; font-weight:500; }
-    .english-content p { max-width:44rem; margin:1rem 0 0; }
-    footer { display:flex; align-items:center; justify-content:space-between; gap:3rem; padding:4rem max(5vw,calc((100vw - 1180px)/2)); background:#303536; color:white; }
-    footer strong { font-family:var(--mincho); font-size:1.15rem; font-weight:400; letter-spacing:.3em; margin-right:-.3em; }
-    footer span { color:rgba(255,255,255,.66); font-size:.78rem; text-align:right; }
-    @media (max-width:850px) { .hero { grid-template-columns:1fr; min-height:auto; padding:6rem 0; } .english-content { grid-template-columns:1fr; gap:2.5rem; } .activity-grid { grid-template-columns:repeat(2,1fr); } }
-    @media (max-width:600px) { .site-header { height:64px; } nav { gap:1rem; } nav a:nth-child(2),nav a:nth-child(5) { display:none; } .hero { padding:4.5rem 0 5.5rem; } .hero h1 { font-size:2.5rem; } .section { padding-top:5rem; padding-bottom:5rem; } .section-heading { grid-template-columns:1fr; gap:.3rem; margin-bottom:2.8rem; } .activity-grid,.video-grid { grid-template-columns:1fr; } .link-list a { grid-template-columns:1fr auto; gap:.2rem 1rem; padding:1rem 0; } .link-list span { grid-column:1/-1; } .media-list a { grid-template-columns:1fr auto; gap:.25rem 1rem; } .media-list small { grid-column:1/-1; } footer { flex-direction:column; align-items:flex-start; } footer span { text-align:left; } }
-    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+
+    .activity-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+    .activity-grid article { padding:22px 20px; background:var(--panel); border-top:2px solid var(--line); }
+    .activity-grid h3 { margin:0 0 10px; font-size:16px; font-weight:800; letter-spacing:.06em; }
+    .activity-grid p { margin:0; color:var(--muted); font-size:13.5px; line-break:strict; }
+
+    .band { position:relative; height:clamp(220px,34vw,420px); overflow:hidden; }
+    .band img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 50%; filter:brightness(.85) contrast(1.05) saturate(.95); }
+    .band::before,.band::after { content:""; position:absolute; left:0; right:0; z-index:1; height:30%; }
+    .band::before { top:0; background:linear-gradient(var(--bg),transparent); }
+    .band::after { bottom:0; background:linear-gradient(transparent,var(--bg)); }
+
+    .video-frame { position:relative; overflow:hidden; width:100%; aspect-ratio:16/9; background:#1d1d20; border-radius:2px; }
+    .video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .video-feature { margin-bottom:26px; }
+    .video-feature h3 { margin:10px 0 0; font-size:13px; font-weight:700; line-height:1.7; }
+    .video-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; }
+    .video-grid h3 { margin:10px 0 0; color:#d6d6d6; font-size:12.5px; font-weight:500; line-height:1.7; }
+    .more-link { display:inline-block; margin-top:30px; padding-bottom:4px; border-bottom:1px solid var(--coral); font-size:12px; letter-spacing:.14em; }
+    .more-link:hover { color:var(--coral); }
+
+    .works-content { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:clamp(24px,5vw,64px); align-items:start; }
+    .works-content img { display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; filter:contrast(1.03); }
+    .works-lead { margin:0; color:var(--muted); font-size:13.5px; }
+    .works-list { margin:18px 0; padding:0; list-style:none; }
+    .works-list li { padding:12px 0; border-bottom:1px solid var(--line); font-size:14px; text-align:justify; line-break:strict; }
+    .works-status { margin:18px 0 0; color:var(--muted); font-size:12.5px; }
+    .works-cta { display:inline-block; margin-top:18px; padding:14px 28px; background:rgba(226,103,78,.16); border:1px solid rgba(226,103,78,.7); border-radius:8px; color:#fff; font-size:13px; font-weight:600; letter-spacing:.12em; transition:background .2s; }
+    .works-cta:hover { background:rgba(226,103,78,.32); }
+
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,5vw,64px); }
+    .link-list a,.media-list a { display:grid; grid-template-columns:150px 1fr 20px; gap:16px; align-items:center; padding:15px 0; border-bottom:1px solid var(--line); font-size:13.5px; }
+    .link-list strong,.media-list small { font-size:13px; font-weight:800; letter-spacing:.04em; }
+    .link-list span,.media-list span { color:var(--muted); }
+    .link-list em,.media-list em { color:var(--coral); font-style:normal; }
+    .link-list a:hover span,.media-list a:hover span { color:var(--text); }
+
+    .english-content h3 { margin:0 0 8px; font-size:18px; font-weight:800; }
+    .english-content p { margin:0; color:var(--muted); font-size:14px; line-height:1.9; }
+
+    footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; padding:34px clamp(16px,5vw,48px); border-top:1px solid var(--line); color:#8a8a8e; font-size:11px; letter-spacing:.08em; }
+    footer strong { color:var(--text); font-size:13px; font-weight:800; letter-spacing:.14em; }
+
+    @media (max-width:860px) { .two-col { grid-template-columns:1fr; } }
+    @media (max-width:760px) {
+      .profile-content,.works-content { grid-template-columns:1fr; }
+      .profile-content img,.works-content img { max-width:420px; margin:0 auto; }
+      .works-content img { order:-1; }
+    }
+    @media (max-width:640px) {
+      nav { gap:12px; font-size:9.5px; letter-spacing:.1em; }
+      .link-list a,.media-list a { grid-template-columns:1fr 20px; gap:2px 12px; }
+      .link-list span,.media-list span { grid-column:1; }
+      .link-list em,.media-list em { grid-column:2; grid-row:1/3; }
+    }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .works-cta { transition:none; } }
   </style>
 </head>
 <body>
   <main>
-    <header class="site-header"><a href="#top" class="header-name"><span class="hn-ja">菅谷詩織</span><span class="hn-en">SHIORI SUGAYA</span></a><nav aria-label="ページ内ナビゲーション"><a href="#profile">PROFILE</a><a href="#activity">ACTIVITY</a><a href="#video">VIDEO</a><a href="#works">WORKS</a><a href="#links">LINKS</a></nav></header>
-    <section class="hero" id="top"><div><h1>菅谷詩織</h1><p class="aliases">すがやしおり　／　Shiori Sugaya</p><p class="roles">鍵盤ハーモニカ奏者・ピアニスト・作編曲家</p></div><div class="hero-video"><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/cfTaKf_GI_o?rel=0" title="Oblivion｜菅谷詩織による鍵盤ハーモニカ演奏" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><p>Oblivion / A. Piazzolla</p></div></section>
-    <section class="section" id="profile"><div class="section-heading"><h2>PROFILE</h2><p>プロフィール</p></div><div class="profile-content"><div class="profile-text"><p>菅谷詩織（すがやしおり／Shiori Sugaya）は、鍵盤ハーモニカ奏者、ピアニスト、作編曲家として活動する音楽家。</p><p>6歳よりピアノ、12歳よりサクソフォンを始める。高校ではサクソフォンを専攻し、2年次にピアノへ転向。昭和音楽大学ピアノ演奏家コースを卒業。18歳から独学で鍵盤ハーモニカを始める。</p><p>音楽の土台はクラシックでつくられた。その後はポピュラー音楽の現場で演奏を重ね、そこで培った感覚が、鍵盤ハーモニカとピアノの演奏スタイルの核になっている。</p><p>コンサート、レコーディング、学校公演、親子向け公演など、幅広く演奏活動を行っている。NHK Eテレ「沼にハマってきいてみた」に出演。リコーダー、鍵盤ハーモニカ、ピアノによる「おんがくしつトリオ」メンバー。</p><p>YouTubeチャンネル「すがやしおり」では、鍵盤ハーモニカの演奏をはじめ、息・発音・音色についての解説を発信。チャンネル登録者数は1万人を超える。ソロ・アンサンブル楽譜の制作も行っている。</p><p>指導者としては、個人・グループレッスンのほか、鍵盤ハーモニカのアンサンブルクラスを主宰。ピアノ指導者や幼稚園教諭を対象とした講座・セミナーも行ってきた。</p><p>また、作編曲家として、テレビCMやWeb CMをはじめとする映像音楽を数多く手がけている。演奏者としては、アニメ・ゲーム作品のレコーディングにも参加。</p><p>「Shiori Sugaya」名義ではオリジナルピアノ作品を発表し、150以上の国と地域で累計300万回以上再生されている。</p></div></div></section>
-    <section class="section activity" id="activity"><div class="section-heading"><h2>ACTIVITY</h2><p>活動</p></div><div class="activity-grid"><article><h3>鍵盤ハーモニカ</h3><p>ソロ、アンサンブル、学校公演、レコーディング。ミューザ川崎シンフォニーホール、札幌コンサートホールKitara、各地の市民文化会館などで演奏。リコーダー・鍵盤ハーモニカ・ピアノによるユニット「おんがくしつトリオ」でも活動している。</p></article><article><h3>ピアノ</h3><p>演奏、レコーディング。これまでにアーティストのツアーや、ラジオ・テレビ出演のサポートも務めてきた。「Shiori Sugaya」名義でアルバム「Shade」「Phase」、EP「Uncontrived」を発表。</p></article><article><h3>作曲・編曲</h3><p>演奏会用アレンジや、鍵盤ハーモニカ用楽譜の制作。CM音楽では、これまでに三井物産、日清食品、Boehringer Ingelheim、Jimmy Choo、Grand Seiko などを担当。</p></article><article><h3>レッスン</h3><p>個人・グループレッスン、鍵盤ハーモニカのアンサンブルクラス主宰、ピアノ指導者・幼稚園教諭向けの講座。</p></article></div></section>
-    <section class="section" id="video"><div class="section-heading"><h2>VIDEO</h2><p>演奏動画</p></div><div class="video-grid"><article><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/7B-rOmpGYJ0?rel=0" title="幻想即興曲｜菅谷詩織による鍵盤ハーモニカとピアノの演奏" allowfullscreen></iframe></div><h3>幻想即興曲を鍵盤ハーモニカとピアノでテンション高めに演奏してみました</h3></article><article><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/CYcTj2FDp9Y?rel=0" title="ノクターン Op.9-2 ジャズワルツver｜菅谷詩織による鍵盤ハーモニカ演奏" allowfullscreen></iframe></div><h3>Nocturne Op.9-2 / F.Chopin (Jazz Waltz ver.)</h3></article><article><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/nxP1aQOtDys?rel=0" title="情熱大陸 聞き比べ｜菅谷詩織による鍵盤ハーモニカ演奏" allowfullscreen></iframe></div><h3>鍵盤ハーモニカ奏者が「情熱大陸」でピアニカとメロディオン 吹き比べしてみた！</h3></article></div><a class="more-link" href="https://www.youtube.com/@Cco812" target="_blank" rel="noreferrer">YouTubeチャンネルを見る ↗</a></section>
-    <section class="section" id="works"><div class="section-heading"><h2>WORKS</h2><p>ご依頼</p></div><p class="works-lead">これまでにいただいたご依頼例です。</p><ul class="works-list"><li>鍵盤ハーモニカによるコンサート（ソロ・アンサンブル・バンド編成）</li><li>ホール主催の小学生向けワークショップ</li><li>セミナー・ウェビナー講師、幼稚園教諭・ピアノ指導者向け研修</li><li>指導コンテンツの動画制作（構成・撮影・編集）</li></ul><p class="works-status">お返事は通常3日以内にいたします。</p><a class="more-link works-cta" href="https://form.run/@shiico--rDeOyYk95YD5zROf4kdA" target="_blank" rel="noreferrer">ご依頼・お問い合わせ ↗</a></section><section class="section links-section" id="links"><div class="section-heading"><h2>LINKS</h2><p>公式リンク</p></div><div class="link-list"><a href="https://www.youtube.com/@Cco812" target="_blank" rel="noreferrer"><strong>YouTube</strong><span>すがやしおり</span><em>↗</em></a><a href="https://lin.ee/GoD4ljP" target="_blank" rel="noreferrer"><strong>公式LINE</strong><span>レッスンのご案内・お申し込み</span><em>↗</em></a><a href="https://store.piascore.com/search?c=3300" target="_blank" rel="noreferrer"><strong>Piascore</strong><span>鍵盤ハーモニカ・ピアノ楽譜</span><em>↗</em></a><a href="https://open.spotify.com/artist/2j9Dpexujg1dkE2q25iPPq" target="_blank" rel="noreferrer"><strong>Spotify</strong><span>Shiori Sugaya</span><em>↗</em></a><a href="https://music.apple.com/artist/shiori-sugaya/1183622650" target="_blank" rel="noreferrer"><strong>Apple Music</strong><span>Shiori Sugaya</span><em>↗</em></a></div></section>
-    <section class="section"><div class="section-heading"><h2>MEDIA</h2><p>掲載・外部プロフィール</p></div><div class="media-list"><a href="https://ontomo-mag.com/people/shiori-sugaya/" target="_blank" rel="noreferrer"><small>ONTOMO</small><span>すがや・しおり｜鍵盤ハーモニカ奏者、ピアニスト</span><em>↗</em></a><a href="https://www.suzuki-music.co.jp/melodion_tv/43595/" target="_blank" rel="noreferrer"><small>鈴木楽器製作所</small><span>ケンハモ奏者 菅谷詩織／おんがくしつトリオ</span><em>↗</em></a><a href="https://www.gakufu.co.jp/blogs/music-people/vol58" target="_blank" rel="noreferrer"><small>楽譜出版ケイ・エム・ピー</small><span>Music People vol.58 菅谷詩織</span><em>↗</em></a><a href="https://spice.eplus.jp/articles/299913" target="_blank" rel="noreferrer"><small>SPICE</small><span>Shiori Sugaya インタビュー｜1stアルバム「Shade」</span><em>↗</em></a><a href="https://mora.jp/topics/news/post-69731/" target="_blank" rel="noreferrer"><small>mora</small><span>Shiori Sugaya インタビュー｜2ndアルバム「Phase」</span><em>↗</em></a><a href="https://note.com/naxosjapan/n/n22f0fef8576a" target="_blank" rel="noreferrer"><small>ナクソス・ジャパン</small><span>Shiori Sugaya インタビュー｜EP「Uncontrived」</span><em>↗</em></a></div></section>
-    <section class="section" lang="en"><div class="section-heading"><h2>ENGLISH</h2><p>English profile</p></div><div class="english-content"><h3>Shiori Sugaya</h3><p>Shiori Sugaya is a Japanese melodica player, pianist, composer and arranger. Grounded in classical music, she performs in concert halls, schools and recording studios, and shares the expressive possibilities of the melodica through performance, arranging and music education.</p></div></section>
-    <footer><strong>菅谷詩織</strong><span>すがやしおり / Shiori Sugaya<br>Melodica player · Pianist · Composer / Arranger</span></footer>
+    <div class="top">
+      <header class="site-header"><a href="#top" class="header-name"><span class="hn-ja">菅谷詩織</span><span class="sr-only">SHIORI SUGAYA</span><span class="hn-en spread" aria-hidden="true"><span>S</span><span>H</span><span>I</span><span>O</span><span>R</span><span>I</span><span> </span><span>S</span><span>U</span><span>G</span><span>A</span><span>Y</span><span>A</span></span></a><nav aria-label="ページ内ナビゲーション"><a href="#profile">PROFILE</a><a href="#activity">ACTIVITY</a><a href="#video">VIDEO</a><a href="#works">WORKS</a><a href="#links">LINKS</a></nav></header>
+      <section class="hero" id="top"><img src="images/hero-00124.jpg" alt="鍵盤ハーモニカを持って微笑む菅谷詩織" width="2000" height="1333" fetchpriority="high"><div class="hero-title"><h1>菅谷詩織</h1><p class="aliases"><span class="sr-only">SHIORI SUGAYA ／ すがやしおり</span><span class="spread" aria-hidden="true"><span>S</span><span>H</span><span>I</span><span>O</span><span>R</span><span>I</span><span> </span><span>S</span><span>U</span><span>G</span><span>A</span><span>Y</span><span>A</span><span> </span><span>／</span><span> </span><span>す</span><span>が</span><span>や</span><span>し</span><span>お</span><span>り</span></span></p><p class="roles">鍵盤ハーモニカ奏者・ピアニスト・作編曲家</p></div></section>
+    </div>
+    <section class="profile" id="profile"><div class="wrap"><div class="section-heading"><h2>PROFILE</h2><p>プロフィール</p></div><div class="profile-content"><img src="images/profile.jpg" alt="コーラルのドレスで鍵盤ハーモニカを背に持つ菅谷詩織" width="933" height="1400" loading="lazy"><div class="profile-text"><p>菅谷詩織（すがやしおり／Shiori Sugaya）は、鍵盤ハーモニカ奏者、ピアニスト、作編曲家として活動する音楽家。</p><p>6歳よりピアノ、12歳よりサクソフォンを始める。高校ではサクソフォンを専攻し、2年次にピアノへ転向。昭和音楽大学ピアノ演奏家コースを卒業。18歳から独学で鍵盤ハーモニカを始める。</p><p>音楽の土台はクラシックでつくられた。その後はポピュラー音楽の現場で演奏を重ね、そこで培った感覚が、鍵盤ハーモニカとピアノの演奏スタイルの核になっている。</p><p>コンサート、レコーディング、学校公演、親子向け公演など、幅広く演奏活動を行っている。NHK Eテレ「沼にハマってきいてみた」に出演。リコーダー、鍵盤ハーモニカ、ピアノによる「おんがくしつトリオ」メンバー。</p><p>YouTubeチャンネル「すがやしおり」では、鍵盤ハーモニカの演奏をはじめ、息・発音・音色についての解説を発信。チャンネル登録者数は1万人を超える。ソロ・アンサンブル楽譜の制作も行っている。</p><p>指導者としては、個人・グループレッスンのほか、鍵盤ハーモニカのアンサンブルクラスを主宰。ピアノ指導者や幼稚園教諭を対象とした講座・セミナーも行ってきた。</p><p>また、作編曲家として、テレビCMやWeb CMをはじめとする映像音楽を数多く手がけている。演奏者としては、アニメ・ゲーム作品のレコーディングにも参加。</p><p>「Shiori Sugaya」名義ではオリジナルピアノ作品を発表し、150以上の国と地域で累計300万回以上再生されている。</p></div></div></div></section>
+    <section id="activity"><div class="wrap"><div class="section-heading"><h2>ACTIVITY</h2><p>活動</p></div><div class="activity-grid"><article><h3>鍵盤ハーモニカ</h3><p>ソロ、アンサンブル、学校公演、レコーディング。ミューザ川崎シンフォニーホール、札幌コンサートホールKitara、各地の市民文化会館などで演奏。リコーダー・鍵盤ハーモニカ・ピアノによるユニット「おんがくしつトリオ」でも活動している。</p></article><article><h3>ピアノ</h3><p>演奏、レコーディング。これまでにアーティストのツアーや、ラジオ・テレビ出演のサポートも務めてきた。「Shiori Sugaya」名義でアルバム「Shade」「Phase」、EP「Uncontrived」を発表。</p></article><article><h3>作曲・編曲</h3><p>演奏会用アレンジや、鍵盤ハーモニカ用楽譜の制作。CM音楽では、これまでに三井物産、日清食品、Boehringer Ingelheim、Jimmy Choo、Grand Seiko などを担当。</p></article><article><h3>レッスン</h3><p>個人・グループレッスン、鍵盤ハーモニカのアンサンブルクラス主宰、ピアノ指導者・幼稚園教諭向けの講座。</p></article></div></div></section>
+    <div class="band"><img src="images/band-00251.jpg" alt="" width="2000" height="1200" loading="lazy"></div>
+    <section id="video"><div class="wrap"><div class="section-heading"><h2>VIDEO</h2><p>演奏動画</p></div><article class="video-feature"><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/cfTaKf_GI_o?rel=0" title="Oblivion｜菅谷詩織による鍵盤ハーモニカ演奏" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><h3>Oblivion / A. Piazzolla</h3></article><div class="video-grid"><article><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/7B-rOmpGYJ0?rel=0" title="幻想即興曲｜菅谷詩織による鍵盤ハーモニカとピアノの演奏" loading="lazy" allowfullscreen></iframe></div><h3>幻想即興曲を鍵盤ハーモニカとピアノでテンション高めに演奏してみました</h3></article><article><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/CYcTj2FDp9Y?rel=0" title="ノクターン Op.9-2 ジャズワルツver｜菅谷詩織による鍵盤ハーモニカ演奏" loading="lazy" allowfullscreen></iframe></div><h3>Nocturne Op.9-2 / F.Chopin (Jazz Waltz ver.)</h3></article><article><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/nxP1aQOtDys?rel=0" title="情熱大陸 聞き比べ｜菅谷詩織による鍵盤ハーモニカ演奏" loading="lazy" allowfullscreen></iframe></div><h3>鍵盤ハーモニカ奏者が「情熱大陸」でピアニカとメロディオン 吹き比べしてみた！</h3></article></div><a class="more-link" href="https://www.youtube.com/@Cco812" target="_blank" rel="noreferrer">YouTubeチャンネルを見る ↗</a></div></section>
+    <section id="works"><div class="wrap"><div class="section-heading"><h2>WORKS</h2><p>ご依頼</p></div><div class="works-content"><div><p class="works-lead">これまでにいただいたご依頼例です。</p><ul class="works-list"><li>鍵盤ハーモニカによるコンサート（ソロ・アンサンブル・バンド編成）</li><li>ホール主催の小学生向けワークショップ</li><li>セミナー・ウェビナー講師、幼稚園教諭・ピアノ指導者向け研修</li><li>指導コンテンツの動画制作（構成・撮影・編集）</li></ul><p class="works-status">お返事は通常3日以内にいたします。</p><a class="works-cta" href="https://form.run/@shiico--rDeOyYk95YD5zROf4kdA" target="_blank" rel="noreferrer">ご依頼・お問い合わせ ↗</a></div><img src="images/works-00310.jpg" alt="鍵盤ハーモニカを抱えて笑う菅谷詩織" width="933" height="1400" loading="lazy"></div></div></section>
+    <div class="wrap"><div class="two-col"><section id="links"><div class="section-heading"><h2>LINKS</h2><p>公式リンク</p></div><div class="link-list"><a href="https://www.youtube.com/@Cco812" target="_blank" rel="noreferrer"><strong>YouTube</strong><span>すがやしおり</span><em>↗</em></a><a href="https://lin.ee/GoD4ljP" target="_blank" rel="noreferrer"><strong>公式LINE</strong><span>レッスンのご案内・お申し込み</span><em>↗</em></a><a href="https://store.piascore.com/search?c=3300" target="_blank" rel="noreferrer"><strong>Piascore</strong><span>鍵盤ハーモニカ・ピアノ楽譜</span><em>↗</em></a><a href="https://open.spotify.com/artist/2j9Dpexujg1dkE2q25iPPq" target="_blank" rel="noreferrer"><strong>Spotify</strong><span>Shiori Sugaya</span><em>↗</em></a><a href="https://music.apple.com/artist/shiori-sugaya/1183622650" target="_blank" rel="noreferrer"><strong>Apple Music</strong><span>Shiori Sugaya</span><em>↗</em></a></div></section><section><div class="section-heading"><h2>MEDIA</h2><p>掲載・外部プロフィール</p></div><div class="media-list"><a href="https://ontomo-mag.com/people/shiori-sugaya/" target="_blank" rel="noreferrer"><small>ONTOMO</small><span>すがや・しおり｜鍵盤ハーモニカ奏者、ピアニスト</span><em>↗</em></a><a href="https://www.suzuki-music.co.jp/melodion_tv/43595/" target="_blank" rel="noreferrer"><small>鈴木楽器製作所</small><span>ケンハモ奏者 菅谷詩織／おんがくしつトリオ</span><em>↗</em></a><a href="https://www.gakufu.co.jp/blogs/music-people/vol58" target="_blank" rel="noreferrer"><small>楽譜出版ケイ・エム・ピー</small><span>Music People vol.58 菅谷詩織</span><em>↗</em></a><a href="https://spice.eplus.jp/articles/299913" target="_blank" rel="noreferrer"><small>SPICE</small><span>Shiori Sugaya インタビュー｜1stアルバム「Shade」</span><em>↗</em></a><a href="https://mora.jp/topics/news/post-69731/" target="_blank" rel="noreferrer"><small>mora</small><span>Shiori Sugaya インタビュー｜2ndアルバム「Phase」</span><em>↗</em></a><a href="https://note.com/naxosjapan/n/n22f0fef8576a" target="_blank" rel="noreferrer"><small>ナクソス・ジャパン</small><span>Shiori Sugaya インタビュー｜EP「Uncontrived」</span><em>↗</em></a></div></section></div></div>
+    <section lang="en"><div class="wrap english-content" style="padding-top:0"><div class="section-heading"><h2>ENGLISH</h2><p>English profile</p></div><h3>Shiori Sugaya</h3><p>Shiori Sugaya is a Japanese melodica player, pianist, composer and arranger. Grounded in classical music, she performs in concert halls, schools and recording studios, and shares the expressive possibilities of the melodica through performance, arranging and music education.</p></div></section>
   </main>
+  <footer><strong>菅谷詩織</strong><span>すがやしおり / Shiori Sugaya<br>Melodica player · Pianist · Composer / Arranger</span></footer>
 </body>
 </html>
