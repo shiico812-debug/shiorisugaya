@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 公式LINEからだけ来るページ。検索に出さない・公式サイトからリンクしない（2026-10-13 しーこちゃん） -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>レッスン予定｜すがやしおり</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<!--
+  中身（日程・受付状況）は GAS「しーこ村レッスン予定（公開ページ）」が返すJSONを読んで出す。
+  原本：SHiiCO Claude/lesson_schedule_page/site/lesson_schedule.html（直したらここを直して publish にコピー）
+-->
+<style>
+  :root {
+    --bg: #fbf8f3; --card: #ffffff; --ink: #3a3330; --sub: #8a7f78; --line: #ece4da;
+    --full-bg: #f1eeeb; --full-ink: #6d6560;
+    --p: #c4785a; --p-tint: #fbeee7; --p-deep: #a85f43;
+    --e: #5f8f87; --e-tint: #e5f0ed; --e-deep: #477169;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Zen Maru Gothic", -apple-system, BlinkMacSystemFont, "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
+    font-weight: 500; line-height: 1.6; -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 520px; margin: 0 auto; padding: 0 16px 40px; }
+  .keys {
+    height: 22px; margin: 0 -16px;
+    background:
+      linear-gradient(90deg, transparent 0 10px, var(--ink) 10px 19px, transparent 19px 24px,
+        var(--ink) 24px 33px, transparent 33px 52px, var(--ink) 52px 61px, transparent 61px 66px,
+        var(--ink) 66px 75px, transparent 75px 80px, var(--ink) 80px 89px, transparent 89px 98px) top left / 98px 13px repeat-x,
+      repeating-linear-gradient(90deg, #fff 0 13px, var(--line) 13px 14px) top / 14px 22px repeat-x;
+    border-bottom: 1px solid var(--line); opacity: .85;
+  }
+  header { text-align: center; padding: 22px 0 6px; }
+  header .eyebrow { font-size: 12px; letter-spacing: .22em; color: var(--sub); }
+  header h1 { font-size: 26px; margin: 2px 0 0; font-weight: 900; }
+
+  .jump { display: flex; gap: 10px; margin: 14px 0 6px; }
+  .jump button {
+    flex: 1; border: 0; border-radius: 999px; padding: 10px 6px; cursor: pointer;
+    font: inherit; font-weight: 700; font-size: 14px; color: #fff;
+  }
+  .jump .to-p { background: var(--p); }
+  .jump .to-e { background: var(--e); }
+
+  section.sec { --c: var(--p); --tint: var(--p-tint); --deep: var(--p-deep); margin-top: 26px; scroll-margin-top: 12px; }
+  section.sec.ensemble { --c: var(--e); --tint: var(--e-tint); --deep: var(--e-deep); margin-top: 44px; }
+  .band {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--c); color: #fff; border-radius: 18px; padding: 16px 18px; margin-bottom: 14px;
+  }
+  .band .icon {
+    width: 46px; height: 46px; flex: none; border-radius: 50%; background: rgba(255,255,255,.22);
+    display: grid; place-items: center; font-size: 24px;
+  }
+  .band .en { font-size: 11px; letter-spacing: .2em; opacity: .9; }
+  .band h2 { margin: 0; font-size: 24px; font-weight: 900; line-height: 1.3; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--c);
+    border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
+  }
+  .month {
+    display: inline-block; font-size: 13px; font-weight: 700; color: var(--deep);
+    background: var(--tint); border-radius: 999px; padding: 1px 12px; margin-bottom: 8px;
+  }
+  .date { font-size: 18px; font-weight: 700; }
+  .date .at { font-weight: 500; color: var(--sub); font-size: 14px; margin-left: 6px; }
+  .meta { font-size: 14px; color: var(--sub); }
+  .row + .row { margin-top: 6px; }
+  .status { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 700; }
+  .status.before, .status.open { background: var(--tint); color: var(--deep); }
+  .status.full, .status.closed { background: var(--full-bg); color: var(--full-ink); }
+  .btn {
+    display: block; margin-top: 10px; text-align: center; text-decoration: none;
+    background: var(--c); color: #fff; font-weight: 700;
+    padding: 12px; border-radius: 999px; font-size: 15px;
+  }
+  .mine { border-style: dashed; }
+  .mine-title { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+  .btn-sub { background: #fff; color: var(--c); border: 1.5px solid var(--c); }
+  .note { margin-top: 10px; font-size: 12px; color: var(--sub); line-height: 1.7; }
+  .nowrap { white-space: nowrap; }
+  .empty { text-align: center; color: var(--sub); font-size: 14px; padding: 14px 0; }
+  footer { margin-top: 32px; text-align: center; font-size: 12px; color: var(--sub); }
+
+  /* 読み込み中 */
+  .loading { text-align: center; padding: 56px 0 40px; color: var(--sub); }
+  .loading .dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; }
+  .loading .dots span {
+    width: 12px; height: 12px; border-radius: 50%; background: var(--p); animation: hop 1.1s infinite ease-in-out;
+  }
+  .loading .dots span:nth-child(2) { background: #d9a48c; animation-delay: .15s; }
+  .loading .dots span:nth-child(3) { background: var(--e); animation-delay: .3s; }
+  @keyframes hop { 0%, 80%, 100% { transform: translateY(0); opacity: .5; } 40% { transform: translateY(-10px); opacity: 1; } }
+  .loading .msg { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .loading .hint { font-size: 12px; margin-top: 4px; }
+  .error { text-align: center; padding: 40px 0; }
+  .error p { color: var(--sub); font-size: 14px; }
+  .error button {
+    border: 1.5px solid var(--p); background: #fff; color: var(--p); border-radius: 999px;
+    padding: 10px 22px; font: inherit; font-weight: 700; cursor: pointer;
+  }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <div class="keys" aria-hidden="true"></div>
+  <header>
+    <div class="eyebrow">LESSON SCHEDULE</div>
+    <h1>レッスン予定</h1>
+  </header>
+
+  <div class="loading" id="loading" role="status">
+    <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="msg">読み込み中…</div>
+    <div class="hint">表示まで数秒かかることがあります</div>
+  </div>
+
+  <div class="error" id="error" hidden>
+    <p>うまく読み込めませんでした。<br>少し時間をおいて、もう一度お試しください。</p>
+    <button type="button" onclick="location.reload()">もう一度読み込む</button>
+  </div>
+
+  <div id="content" hidden>
+    <nav class="jump">
+      <button type="button" class="to-p" data-target="sec-p">🎹 個人レッスン</button>
+      <button type="button" class="to-e" data-target="sec-e">🎶 アンサンブル</button>
+    </nav>
+
+    <section class="sec personal" id="sec-p">
+      <div class="band">
+        <div class="icon">🎹</div>
+        <div><div class="en">PRIVATE LESSON</div><h2>個人レッスン</h2></div>
+      </div>
+      <div class="list"></div>
+      <div class="card mine">
+        <div class="mine-title">🗓️ ご自分の予約を確認する</div>
+        <div class="meta">確定したレッスンはカレンダーでご確認いただけます。</div>
+        <a class="btn btn-sub" href="https://debonair-charger-9d6.notion.site/28d6f5d47b1e80f3a053cc2ab91b62f8?v=28d6f5d47b1e808f9d05000c27d6ee9f">レッスンカレンダーを開く</a>
+        <div class="note">※名字のイニシャルで表示されています<span class="nowrap">（例：Sさん）</span>。<br>表示名の変更をご希望の方は、お気軽にLINEでご連絡ください📩<br>※スタジオの場所やレッスンの詳細は、LINEでのご連絡内容をご確認ください。</div>
+      </div>
+    </section>
+
+    <section class="sec ensemble" id="sec-e">
+      <div class="band">
+        <div class="icon">🎶</div>
+        <div><div class="en">ENSEMBLE CLASS</div><h2>アンサンブルクラス</h2></div>
+      </div>
+      <div class="list"></div>
+    </section>
+  </div>
+
+  <footer>この予定は受付の状況にあわせて自動で更新されます<br>すがやしおり 鍵盤ハーモニカレッスン</footer>
+</main>
+
+<script>
+(function () {
+  var API = 'https://script.google.com/macros/s/AKfycbxbtYVgqC0_K9C_uyCoKcTfczjGW_a1gDXanXlHbZOi-av7tvrm1KHDIaafEbsvwJER/exec?format=json';
+  var TIMEOUT_MS = 30000;
+
+  // 配ってよいフォームURLだけ通す（GAS側と同じ許可リスト。/edit は絶対に出さない）
+  function safeFormUrl(u) {
+    u = String(u || '');
+    if (u.indexOf('/edit') !== -1) return '';
+    if (/^https:\/\/forms\.gle\/[A-Za-z0-9]+$/.test(u)) return u;
+    if (/^https:\/\/docs\.google\.com\/forms\/d\/e\/[A-Za-z0-9_-]+\/viewform$/.test(u)) return u;
+    return '';
+  }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function statusEl(st) {
+    st = st || {};
+    if (st.kind === 'full') return el('div', 'status full', '▶︎ 満席です🙇‍♀️');
+    if (st.kind === 'closed') return el('div', 'status closed', '▶︎ 受付は終了しました');
+    if (st.kind === 'open') {
+      var box = el('div', 'status open', '▷ 受付中です');
+      var url = safeFormUrl(st.formUrl);
+      if (url) {
+        var a = el('a', 'btn', 'お申し込みフォームを開く');
+        a.href = url;
+        box.appendChild(a);
+      }
+      return box;
+    }
+    return el('div', 'status before', '▷ ' + String(st.openLabel || '') + 'より受付開始です');
+  }
+
+  function render(listEl, blocks, showMonth) {
+    if (!blocks || !blocks.length) {
+      listEl.appendChild(el('p', 'empty', '次回の日程は決まりしだいお知らせします。'));
+      return;
+    }
+    blocks.forEach(function (b) {
+      var card = el('div', 'card');
+      if (showMonth) card.appendChild(el('div', 'month', b.title)); // アンサンブルは月1回＝日付だけ
+      (b.dates || []).forEach(function (d) {
+        var row = el('div', 'row');
+        var date = el('div', 'date', d.label);
+        date.appendChild(el('span', 'at', 'at ' + d.venue));
+        row.appendChild(date);
+        if (d.time) row.appendChild(el('div', 'meta', '時間：' + d.time));
+        if (d.piece) row.appendChild(el('div', 'meta', '曲目：' + d.piece));
+        card.appendChild(row);
+      });
+      card.appendChild(statusEl(b.status));
+      listEl.appendChild(card);
+    });
+  }
+
+  function show(id) {
+    ['loading', 'error', 'content'].forEach(function (k) {
+      document.getElementById(k).hidden = (k !== id);
+    });
+  }
+
+  var ctrl = window.AbortController ? new AbortController() : null;
+  var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, TIMEOUT_MS);
+
+  fetch(API, ctrl ? { signal: ctrl.signal } : {})
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) {
+      clearTimeout(timer);
+      if (!data || !data.ok) throw new Error('not ok');
+      render(document.querySelector('#sec-p .list'), data.personal, true);
+      render(document.querySelector('#sec-e .list'), data.ensemble, false);
+      show('content');
+    })
+    .catch(function () { clearTimeout(timer); show('error'); });
+
+  document.querySelectorAll('.jump button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.getElementById(btn.getAttribute('data-target')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+</body>
+</html>
