@@ -38,7 +38,6 @@
     .header-name { font-weight:800; font-size:15px; letter-spacing:.06em; line-height:1.3; }
     .header-name small { display:block; font-weight:500; font-size:9px; letter-spacing:.3em; color:#a9a9ad; }
     .site-header nav a { font-size:12px; letter-spacing:.14em; color:#a9a9ad; }
-    .site-header nav a:hover { color:#fff; }
     .wrap { max-width:760px; margin:0 auto; padding:clamp(36px,7vw,72px) clamp(16px,5vw,40px); }
     .page-title { margin:0; font-size:clamp(28px,5vw,38px); font-weight:800; letter-spacing:.12em; }
     .page-title + p { margin:2px 0 18px; font-family:var(--maru); font-weight:700; font-size:16px; }
@@ -46,7 +45,6 @@
     .toc { display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 4px; }
     .toc a { padding:8px 15px; background:var(--card); border:1px solid var(--line); border-radius:999px; font-family:var(--maru); font-weight:700; font-size:13px; }
     .toc a small { margin-left:6px; color:var(--accent); }
-    .toc a:hover { border-color:var(--accent); }
     .score-section { margin-top:clamp(44px,8vw,72px); scroll-margin-top:16px; }
     .section-heading { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 14px; margin-bottom:8px; }
     .section-heading h2 { margin:0; font-size:13px; font-weight:800; letter-spacing:.3em; }
@@ -63,20 +61,16 @@
     .karaoke-list .kind { margin-left:8px; padding:0 8px; background:var(--accent-tint); border-radius:999px; font-family:var(--maru); font-size:11px; font-weight:700; color:#a7533d; white-space:nowrap; }
     .karaoke-list .new { margin-left:8px; color:var(--accent); font-size:10.5px; font-weight:800; letter-spacing:.12em; }
     .karaoke-list .score { flex:none; color:var(--accent); font-size:12px; font-weight:700; letter-spacing:.06em; }
-    .karaoke-list .score:hover { text-decoration:underline; }
     .karaoke-list .score.none { color:var(--sub); font-weight:500; font-size:11px; letter-spacing:0; }
     .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:7px; }
     .chip { padding:2px 11px; border:1px solid var(--line); border-radius:999px; color:var(--sub); font-size:11.5px; }
     .chip.tip { border-color:#f1d9cf; background:var(--accent-tint); color:#a7533d; }
     .advice-list .row.advice { align-items:center; }
-    .advice-list .row.advice:hover .title { color:var(--accent); }
     .advice-list .song { display:block; color:var(--sub); font-size:11.5px; }
     .advice-list .watch { flex:none; padding:1px 10px; border:1px solid var(--line); border-radius:999px; color:var(--sub); font-size:11.5px; }
-    .chip:hover { color:var(--ink); border-color:var(--sub); }
     .join { margin:22px 0 0; padding:18px 20px; background:var(--accent-tint); border-radius:14px; font-size:13.5px; }
     .join strong { font-family:var(--maru); font-size:15px; }
     .join a.btn { display:inline-block; margin-top:10px; padding:8px 20px; background:var(--accent); color:#fff; border-radius:999px; font-family:var(--maru); font-weight:700; font-size:13px; }
-    .join a.btn:hover { opacity:.88; }
     .search { position:sticky; top:0; z-index:5; margin:18px calc(-1 * clamp(16px,5vw,40px)) 0; padding:10px clamp(16px,5vw,40px); background:var(--bg); }
     .search input { width:100%; padding:11px 16px 11px 40px; border:1px solid var(--line); border-radius:999px; background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238a7f78' stroke-width='2'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='M11 11l4 4'/%3E%3C/svg%3E") no-repeat 15px center; color:var(--ink); font:inherit; font-size:16px; outline:none; }
     .search label { display:block; margin:0 4px 6px; color:var(--sub); font-size:12px; }
@@ -87,6 +81,15 @@
     .note a { color:var(--ink); border-bottom:1px solid var(--accent); }
     footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; padding:28px clamp(16px,5vw,48px); background:var(--dark); color:#8a8a8e; font-size:11px; letter-spacing:.08em; }
     footer strong { color:#f2f2f2; font-size:13px; font-weight:800; letter-spacing:.14em; }
+    /* マウスがある画面だけ色を変える（スマホはタップした行に色が残ってしまうため・2026-10-20） */
+    @media (hover:hover) {
+      .site-header nav a:hover { color:#fff; }
+      .toc a:hover { border-color:var(--accent); }
+      .karaoke-list .score:hover { text-decoration:underline; }
+      .advice-list .row.advice:hover .title { color:var(--accent); }
+      .chip:hover { color:var(--ink); border-color:var(--sub); }
+      .join a.btn:hover { opacity:.88; }
+    }
     @media (max-width:640px) {
       .karaoke-list .row { flex-direction:column; gap:2px; }
     }
@@ -128,7 +131,7 @@
 <li id="k342171" data-search="ハンガリー舞曲第5番 / J. Brahms ソロ ブラームス "><div class="row"><span class="title">ハンガリー舞曲第5番 / J. Brahms</span><a class="score" href="https://store.piascore.com/scores/342171" target="_blank" rel="noreferrer">楽譜 ↗</a></div><div class="chips"><a class="chip" href="https://youtu.be/UxkdZoeMGbs" target="_blank" rel="noreferrer">ゆっくり<span aria-hidden="true"> ▶</span></a></div></li>
 <li id="k342166" data-search="スラヴ舞曲 Op. 72-2 / A. Dvorak ソロ ドヴォルザーク ドボルザーク "><div class="row"><span class="title">スラヴ舞曲 Op. 72-2 / A. Dvorak</span><a class="score" href="https://store.piascore.com/scores/342166" target="_blank" rel="noreferrer">楽譜 ↗</a></div><div class="chips"><a class="chip" href="https://youtu.be/Iy-vdyc4SOk" target="_blank" rel="noreferrer">100%<span aria-hidden="true"> ▶</span></a><a class="chip" href="https://youtu.be/HwWk8aygdFI" target="_blank" rel="noreferrer">95%<span aria-hidden="true"> ▶</span></a><a class="chip" href="https://youtu.be/7LsaSG7aUb8" target="_blank" rel="noreferrer">90%<span aria-hidden="true"> ▶</span></a></div></li>
 <li id="k368288" data-search="ワルツ Op. 64-2 / F. Chopin (Latin Jazz ver.) ソロ ショパン ワンポイント解説 ワルツ Op. 64-2（Latin Jazz ver.）"><div class="row"><span class="title">ワルツ Op. 64-2 / F. Chopin (Latin Jazz ver.)</span><a class="score" href="https://store.piascore.com/scores/368288" target="_blank" rel="noreferrer">楽譜 ↗</a></div><div class="chips"><a class="chip" href="https://youtu.be/blsYI2Zb7wo" target="_blank" rel="noreferrer">100%<span aria-hidden="true"> ▶</span></a><a class="chip" href="https://youtu.be/SbY3HIbE2gk" target="_blank" rel="noreferrer">90%<span aria-hidden="true"> ▶</span></a><a class="chip" href="https://youtu.be/PwKlW54UJrw" target="_blank" rel="noreferrer">80%<span aria-hidden="true"> ▶</span></a><a class="chip tip" href="https://youtu.be/bRNf2W8b_jo" target="_blank" rel="noreferrer">💡 ワンポイント解説<span aria-hidden="true"> ▶</span></a></div></li>
-<li data-search="愛の喜び / F. Kreisler ソロ クライスラー タンギング 息が主役のタンギング"><div class="row"><span class="title">愛の喜び / F. Kreisler</span><span class="score none">楽譜はメンバー限定PDF</span></div><div class="chips"><a class="chip" href="https://youtu.be/lcgEYgtffRs" target="_blank" rel="noreferrer">BPM140<span aria-hidden="true"> ▶</span></a><a class="chip" href="https://youtu.be/cDoWLJf9lUE" target="_blank" rel="noreferrer">演奏テンポ<span aria-hidden="true"> ▶</span></a><a class="chip tip" href="https://youtu.be/VOa23Za6Hvs" target="_blank" rel="noreferrer">💡 タンギング<span aria-hidden="true"> ▶</span></a></div></li>
+<li data-search="愛の喜び / F. Kreisler ソロ クライスラー タンギング 息が主役のタンギング"><div class="row"><span class="title">愛の喜び / F. Kreisler</span><a class="score" href="https://imslp.org/wiki/3_Old_Viennese_Dances_(Kreisler,_Fritz)" target="_blank" rel="noreferrer">楽譜（IMSLP） ↗</a></div><div class="chips"><a class="chip" href="https://youtu.be/lcgEYgtffRs" target="_blank" rel="noreferrer">BPM140<span aria-hidden="true"> ▶</span></a><a class="chip" href="https://youtu.be/cDoWLJf9lUE" target="_blank" rel="noreferrer">演奏テンポ<span aria-hidden="true"> ▶</span></a><a class="chip tip" href="https://youtu.be/VOa23Za6Hvs" target="_blank" rel="noreferrer">💡 タンギング<span aria-hidden="true"> ▶</span></a></div></li>
 <li id="k414704" data-search="やさしさに包まれたなら / 荒井由実 ソロ ユーミン 松任谷由実 魔女の宅急便 ジブリ 音をつなげる 音を自然につなげるためのワンポイント"><div class="row"><span class="title">やさしさに包まれたなら / 荒井由実</span><a class="score" href="https://store.piascore.com/scores/414704" target="_blank" rel="noreferrer">楽譜 ↗</a></div><div class="chips"><a class="chip" href="https://youtu.be/lF2wdz2b80Q" target="_blank" rel="noreferrer">カラオケ<span aria-hidden="true"> ▶</span></a><a class="chip tip" href="https://youtu.be/BfswCgB5UZA" target="_blank" rel="noreferrer">💡 音をつなげる<span aria-hidden="true"> ▶</span></a></div></li>
 <li id="k409611" data-search="「動物の謝肉祭」より『白鳥』/ C. Saint-Saëns ソロ サンサーンス saint-saens まっすぐの息 “まっすぐの息”で音が変わる｜「白鳥」でつくる息の流れ"><div class="row"><span class="title">「動物の謝肉祭」より『白鳥』/ C. Saint-Saëns</span><a class="score" href="https://store.piascore.com/scores/409611" target="_blank" rel="noreferrer">楽譜 ↗</a></div><div class="chips"><a class="chip" href="https://youtu.be/SsSIiubSP_0" target="_blank" rel="noreferrer">カラオケ<span aria-hidden="true"> ▶</span></a><a class="chip tip" href="https://youtu.be/Jkgi-n6iJ9g" target="_blank" rel="noreferrer">💡 まっすぐの息<span aria-hidden="true"> ▶</span></a></div></li>
 <li id="k400896" data-search="Amazing Grace ソロ アメイジンググレイス アメージンググレース "><div class="row"><span class="title">Amazing Grace</span><a class="score" href="https://store.piascore.com/scores/400896" target="_blank" rel="noreferrer">楽譜 ↗</a></div><div class="chips"><a class="chip" href="https://youtu.be/jlV_WWsk6o4" target="_blank" rel="noreferrer">カラオケ<span aria-hidden="true"> ▶</span></a></div></li>
