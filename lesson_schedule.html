@@ -76,7 +76,9 @@
   .meta { font-size: 14px; color: var(--sub); }
   .row + .row { margin-top: 6px; }
   .status { margin-top: 12px; padding: 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 700; }
-  .status.before, .status.open { background: var(--tint); color: var(--deep); }
+  .status.before, .status.open, .status.vacancy { background: var(--tint); color: var(--deep); }
+  .status .note { display: block; margin-top: 4px; font-weight: 500; font-size: 13px; }
+  .meta.slots { color: var(--deep); font-weight: 700; }
   .status.full, .status.closed { background: var(--full-bg); color: var(--full-ink); }
   .btn {
     display: block; margin-top: 10px; text-align: center; text-decoration: none;
@@ -187,6 +189,11 @@
     st = st || {};
     if (st.kind === 'full') return el('div', 'status full', '▶︎ 満席です🙇‍♀️');
     if (st.kind === 'closed') return el('div', 'status closed', '▶︎ 受付は終了しました');
+    if (st.kind === 'vacancy') {
+      var v = el('div', 'status vacancy', '▷ 空きがあります');
+      v.appendChild(el('span', 'note', 'ご希望の方は公式LINEでご一報ください（先着順）'));
+      return v;
+    }
     if (st.kind === 'open') {
       var box = el('div', 'status open', '▷ 受付中です');
       var url = safeFormUrl(st.formUrl);
@@ -215,6 +222,7 @@
         row.appendChild(date);
         if (d.time) row.appendChild(el('div', 'meta', '時間：' + d.time));
         if (d.piece) row.appendChild(el('div', 'meta', '曲目：' + d.piece));
+        if (d.openSlots) row.appendChild(el('div', 'meta slots', '空き：' + d.openSlots));
         card.appendChild(row);
       });
       card.appendChild(statusEl(b.status));
